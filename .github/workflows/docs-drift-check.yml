@@ -1,0 +1,41 @@
+name: Documentation Drift Check
+
+on:
+  pull_request:
+    paths:
+      - 'fastlane/Fastfile'
+
+permissions:
+  pull-requests: write
+
+jobs:
+  check-docs-updated:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check if documentation was updated
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          DOCS_CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- docs/ | wc -l | tr -d ' ')
+
+          if [ "$DOCS_CHANGED" -eq 0 ]; then
+            COMMENT_MARKER="<!-- docs-drift-check -->"
+            EXISTING=$(gh pr view ${{ github.event.pull_request.number }} --json comments --jq ".comments[].body" | grep -c "$COMMENT_MARKER" || true)
+
+            if [ "$EXISTING" -eq 0 ]; then
+              gh pr comment ${{ github.event.pull_request.number }} --body "${COMMENT_MARKER}
+          **Documentation Drift Check**
+
+          The Fastfile was modified in this PR but no documentation files were updated.
+          Please review if any changes in \`docs/\` are needed to keep the documentation in sync.
+
+          Relevant docs to check:
+          - \`docs/lanes/\` — Lane descriptions, options, and workflows
+          - \`docs/configuration/env-variables.md\` — Environment variable tables
+          - \`docs/configuration/helpers.md\` — Helper method documentation"
+            fi
+          fi
