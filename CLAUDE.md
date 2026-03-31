@@ -81,5 +81,4 @@ Deployed automatically to GitHub Pages on push to `main` via `.github/workflows/
 
 ## Required Plugins
 
-- `fastlane-plugin-brew` — Manages Homebrew dependencies
 - `fastlane-plugin-versioning` — Sets version and build numbers

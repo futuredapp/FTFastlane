@@ -1,7 +1,6 @@
 
 default_platform :ios
 
-fastlane_require "fastlane-plugin-brew"
 fastlane_require "fastlane-plugin-versioning"
 
 def keychain_name
@@ -286,7 +285,6 @@ end
 
 private_lane :dependencies do
   ENV["XCODE_VERSION"] && xcodes(version: ENV["XCODE_VERSION"], select_for_current_build_only: true)
-  brew(command: File.exist?("../Brewfile") ? "bundle" : "install swiftlint")
   cocoapods(try_repo_update_on_error: true) if File.exist?("../Podfile")
 end
 
