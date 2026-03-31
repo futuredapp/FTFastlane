@@ -1,7 +1,6 @@
 
 default_platform :ios
 
-fastlane_require "fastlane-plugin-badge"
 fastlane_require "fastlane-plugin-brew"
 fastlane_require "fastlane-plugin-versioning"
 
@@ -148,7 +147,6 @@ lane :beta do |options|
   dependencies
   generate_graphql_operations
   bump(is_beta: true, build_number: options[:build_number], version_number: options[:version_number])
-  add_badge(dark: ENV["BADGE_DARK"])
   configure_keychain
   sync_code_signing(code_signing_settings.merge({
     type: "appstore",
