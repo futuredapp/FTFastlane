@@ -140,7 +140,6 @@ lane :test do
   dependencies
   generate_graphql_operations
   run_tests(tests_settings)
-  danger(remove_previous_comments: true) if is_ci?
 end
 
 desc "Submit a beta build to App Store connect. Options: - build_number: Integer. Custom build number (skips auto-increment from TestFlight).; - version_number: String. Custom version number (skips ENV['VERSION_NUMBER'])."
