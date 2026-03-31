@@ -40,7 +40,7 @@ These are set by each consumer project's Fastfile or `.env` file.
 
 | Variable | Description |
 |----------|-------------|
-| `PR_TITLE` | Pull request title (used as TestFlight changelog for beta builds) |
+| `CHANGELOG` | TestFlight changelog for beta builds |
 | `BADGE_DARK` | Set to `"true"` for dark badge overlay on beta app icons |
 | `XCODE_VERSION` | Specific Xcode version to select |
 | `FL_BUILD_NUMBER_PROJECT` | Path to Xcode project file (if not in root or multiple exist) |

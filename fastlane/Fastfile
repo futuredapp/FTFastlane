@@ -167,7 +167,7 @@ lane :beta do |options|
     team_id: ENV["ASC_TEAM_ID"],
     username: ENV["USER_EMAIL"],
     skip_waiting_for_build_processing: true,
-    changelog: ENV["PR_TITLE"]
+    changelog: ENV["CHANGELOG"]
   )
 end
 

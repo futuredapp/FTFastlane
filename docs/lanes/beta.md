@@ -28,7 +28,7 @@ bundle exec fastlane beta version_number:1.2.0
 7. Creates a temporary CI keychain
 8. Syncs appstore provisioning profiles for the beta bundle identifier (`.beta` suffix)
 9. Builds the app using the **Beta** configuration
-10. Uploads the `.ipa` to TestFlight with `PR_TITLE` as the changelog
+10. Uploads the `.ipa` to TestFlight with `CHANGELOG` as the changelog
 
 ### Environment variables used
 
@@ -40,7 +40,7 @@ bundle exec fastlane beta version_number:1.2.0
 | `APP_EXTENSIONS` | Comma-separated extension names (optional) |
 | `MATCH_PASSWORD` | Password for match certificates |
 | `VERSION_NUMBER` | Marketing version (default: `1.0.0`) |
-| `PR_TITLE` | Pull request title used as TestFlight changelog |
+| `CHANGELOG` | TestFlight changelog text |
 | `BADGE_DARK` | Set to `"true"` for dark badge overlay (optional) |
 | `ADDITIONAL_BUILD_SETTINGS` | JSON string with additional build parameters (optional) |
 

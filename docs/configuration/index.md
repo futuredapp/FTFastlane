@@ -11,6 +11,6 @@ Configuration flows through three layers:
 
 1. **Organization adapter** — Sets organization-specific values (`USER_EMAIL`, `TEAM_ID`, `MATCH_GIT_URL`, etc.)
 2. **Consumer project** — Sets project-specific values (`APP_IDENTIFIER`, `APP_SCHEME`, `APP_NAME`, etc.)
-3. **CI environment** — Sets build-time values (`VERSION_NUMBER`, `PR_TITLE`, `MATCH_PASSWORD`, etc.)
+3. **CI environment** — Sets build-time values (`VERSION_NUMBER`, `CHANGELOG`, `MATCH_PASSWORD`, etc.)
 
 All three layers set standard `ENV` variables. Later assignments override earlier ones.
