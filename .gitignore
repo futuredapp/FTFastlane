@@ -1,2 +1,5 @@
 # Virtual environments
 venv/
+
+# Generated docs
+docs/changelog.md

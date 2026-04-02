@@ -2,6 +2,27 @@
 
 Centralized [Fastlane](https://fastlane.tools) configuration for iOS projects at Futured. This repository provides reusable lanes for common CI/CD tasks including provisioning, testing, beta/release builds, and App Store Connect management.
 
+<!-- WHATS_NEW_START -->
+---
+
+## What's New in 2.0.0
+
+!!! danger "Breaking Changes"
+
+    - Removed plugin `fastlane-plugin-badge`
+    - Removed plugin `fastlane-plugin-brew`
+    - ENV var `BADGE_DARK` is no longer used
+    - ENV var `PR_TITLE` is no longer used
+
+### New
+
+- :material-plus:{ title="Added" } ENV var `CHANGELOG`
+
+[:octicons-arrow-right-24: Full Changelog](changelog.md)
+
+---
+<!-- WHATS_NEW_END -->
+
 ## How it works
 
 The Fastfile in this repository is designed to be imported by individual iOS projects using Fastlane's `import_from_git` feature. Organizations set their specific values (team IDs, email, certificate repo URL) via environment variables, then import this Fastfile to get all lanes.
@@ -45,8 +66,6 @@ import_from_git(url: "git@github.com:your-org/fastlane.git")
 
 | Plugin | Purpose |
 |--------|---------|
-| `fastlane-plugin-badge` | Adds overlay badge to app icon |
-| `fastlane-plugin-brew` | Manages Homebrew dependencies |
 | `fastlane-plugin-versioning` | Sets version and build numbers |
 
 ## Quick links
