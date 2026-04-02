@@ -1270,7 +1270,7 @@
 <h3 id="what-it-does">What it does</h3>
 <ol>
 <li>Configures App Store Connect API key</li>
-<li>Installs dependencies (Xcode version, Homebrew, CocoaPods)</li>
+<li>Installs dependencies (Xcode version, CocoaPods if needed)</li>
 <li>Generates GraphQL operations if configured</li>
 <li>Increments build number based on latest TestFlight build (or uses custom <code>build_number</code>)</li>
 <li>Sets version from <code>VERSION_NUMBER</code> env var, or uses custom <code>version_number</code></li>
@@ -1280,8 +1280,8 @@
 <li><strong>Customer account:</strong> Uses <code>CUSTOMERS_BRANCH</code> and <code>APP_IDENTIFIER_CUSTOMER</code></li>
 </ul>
 </li>
-<li>Builds the app using the <strong>Release</strong> configuration</li>
-<li>Uploads the <code>.ipa</code> to TestFlight</li>
+<li>Builds the app using the Xcode scheme's default configuration</li>
+<li>Uploads the <code>.ipa</code> to TestFlight (no changelog — unlike beta, release builds do not include TestFlight release notes)</li>
 </ol>
 <h3 id="own-account-vs-customer-account">Own account vs. customer account</h3>
 <p>The release lane automatically detects the account type:</p>

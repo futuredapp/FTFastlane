@@ -1266,7 +1266,7 @@
 <tr>
 <td><code>MATCH_PASSWORD</code></td>
 <td>Yes</td>
-<td>Password for decrypting match certificates</td>
+<td>Password for decrypting match certificates (set in CI secrets or <code>.env</code>, not in Fastfile)</td>
 </tr>
 </tbody>
 </table>
@@ -1301,7 +1301,7 @@
 </tr>
 <tr>
 <td><code>VERSION_NUMBER</code></td>
-<td>Marketing version number (defaults to <code>1.0.0</code> for beta, tag name for release)</td>
+<td>Marketing version number (defaults to <code>1.0.0</code> if unset; CI typically sets this from the release tag)</td>
 </tr>
 </tbody>
 </table>
