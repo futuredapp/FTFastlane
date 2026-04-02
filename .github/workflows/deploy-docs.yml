@@ -3,22 +3,113 @@ name: Deploy Documentation
 on:
   push:
     branches: [main]
+    tags: ['*']
     paths:
       - 'fastlane/**'
       - 'docs/**'
       - 'mkdocs.yml'
       - 'requirements-docs.txt'
+      - 'scripts/**'
   workflow_dispatch:
+    inputs:
+      rebuild_all_versions:
+        description: 'Rebuild docs for all version tags (one-time backfill)'
+        type: boolean
+        default: false
+  delete:
 
 permissions:
   contents: write
 
 concurrency:
-  group: deploy-docs
+  group: deploy-docs-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   deploy:
+    if: github.event_name != 'delete' && !(github.event_name == 'workflow_dispatch' && inputs.rebuild_all_versions)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+          cache-dependency-path: requirements-docs.txt
+      - run: pip install -r requirements-docs.txt
+      - name: Determine version and alias
+        id: version
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            VERSION="${GITHUB_REF#refs/tags/}"
+            {
+              echo "version=$VERSION"
+              echo "alias=latest"
+            } >> "$GITHUB_OUTPUT"
+          else
+            BRANCH="${GITHUB_REF#refs/heads/}"
+            {
+              echo "version=${BRANCH//\//-}"
+              echo "alias="
+            } >> "$GITHUB_OUTPUT"
+          fi
+      - run: python scripts/generate_changelog.py --ref ${{ github.ref }}
+      - run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      - name: Deploy versioned docs
+        run: |
+          if [[ -n "${{ steps.version.outputs.alias }}" ]]; then
+            mike deploy --push --update-aliases ${{ steps.version.outputs.version }} ${{ steps.version.outputs.alias }}
+            mike set-default --push latest
+          else
+            mike deploy --push ${{ steps.version.outputs.version }}
+          fi
+
+  rebuild-all-versions:
+    if: github.event_name == 'workflow_dispatch' && inputs.rebuild_all_versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.x'
+          cache: 'pip'
+          cache-dependency-path: requirements-docs.txt
+      - run: pip install -r requirements-docs.txt
+      - run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      - name: Rebuild all version tags
+        run: |
+          LATEST_TAG=$(git tag --sort=-v:refname | head -1)
+
+          for tag in $(git tag --sort=v:refname); do
+            echo "::group::Deploying $tag"
+            python scripts/generate_changelog.py --ref "refs/tags/$tag"
+            if [[ "$tag" == "$LATEST_TAG" ]]; then
+              mike deploy --push --update-aliases "$tag" latest
+            else
+              mike deploy --push "$tag"
+            fi
+            echo "::endgroup::"
+          done
+
+          mike set-default --push latest
+
+          echo "::group::Deploying main"
+          python scripts/generate_changelog.py --ref refs/heads/main
+          mike deploy --push main
+          echo "::endgroup::"
+
+  cleanup-preview:
+    if: github.event_name == 'delete' && github.event.ref_type == 'branch' && github.event.ref != 'main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -33,4 +124,6 @@ jobs:
       - run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      - run: mkdocs gh-deploy --force
+      - run: |
+          VERSION="${{ github.event.ref }}"
+          mike delete --push "${VERSION//\//-}" || true

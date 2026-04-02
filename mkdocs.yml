@@ -64,10 +64,13 @@ nav:
   - Guides:
       - Getting Started: guides/getting-started.md
       - Customer Accounts: guides/customer-accounts.md
+  - Changelog: changelog.md
 
 copyright: Made with ❤️‍🔥 at Futured
 
 extra:
+  version:
+    provider: mike
   social:
     - icon: material/web
       name: Web
