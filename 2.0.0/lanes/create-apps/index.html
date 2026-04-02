@@ -1426,7 +1426,11 @@
 </tbody>
 </table>
 <h3 id="example">Example</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">APP_EXTENSIONS</span><span class="o">=</span><span class="s2">&quot;widget,notification-service&quot;</span><span class="w"> </span>bundle<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>fastlane<span class="w"> </span>create_apps_for_extension
+<p>Set <code>APP_EXTENSIONS</code> in your project's Fastfile:</p>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_EXTENSIONS&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;widget,notification-service&quot;</span>
+</code></pre></div>
+<p>Then run:</p>
+<div class="highlight"><pre><span></span><code>bundle<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>fastlane<span class="w"> </span>create_apps_for_extension
 </code></pre></div>
 <p>This creates identifiers for both <code>widget</code> and <code>notification-service</code> extensions across Debug, Beta, and Release configurations.</p>
 
