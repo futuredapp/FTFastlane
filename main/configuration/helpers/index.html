@@ -1421,8 +1421,11 @@
 <span class="w">  </span><span class="ss">output_directory</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./build_output/&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><strong>Customization:</strong> Set <code>ADDITIONAL_BUILD_SETTINGS</code> with a JSON string to merge additional parameters.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">ADDITIONAL_BUILD_SETTINGS</span><span class="o">=</span><span class="s1">&#39;{&quot;derived_data_path&quot;: &quot;./CustomDerivedData&quot;, &quot;xcargs&quot;: &quot;-allowProvisioningUpdates&quot;}&#39;</span>
+<p><strong>Customization:</strong> Set <code>ADDITIONAL_BUILD_SETTINGS</code> in your project's Fastfile:</p>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;ADDITIONAL_BUILD_SETTINGS&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="ss">derived_data_path</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./CustomDerivedData&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">xcargs</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-allowProvisioningUpdates&quot;</span>
+<span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
 </code></pre></div>
 <hr />
 <h2 id="code_signing_settings">code_signing_settings</h2>
@@ -1436,8 +1439,8 @@
 <span class="w">  </span><span class="ss">keychain_password</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;MATCH_PASSWORD&quot;</span><span class="o">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><strong>Customization:</strong> Set <code>ADDITIONAL_CODE_SIGNING_SETTINGS</code> with a JSON string.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">ADDITIONAL_CODE_SIGNING_SETTINGS</span><span class="o">=</span><span class="s1">&#39;{&quot;readonly&quot;: true}&#39;</span>
+<p><strong>Customization:</strong> Set <code>ADDITIONAL_CODE_SIGNING_SETTINGS</code> in your project's Fastfile:</p>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;ADDITIONAL_CODE_SIGNING_SETTINGS&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="ss">readonly</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span><span class="w"> </span><span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1454,8 +1457,10 @@
 <span class="w">  </span><span class="ss">result_bundle</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span>
 <span class="p">}</span>
 </code></pre></div>
-<p><strong>Customization:</strong> Set <code>ADDITIONAL_TESTS_SETTINGS</code> with a JSON string.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">ADDITIONAL_TESTS_SETTINGS</span><span class="o">=</span><span class="s1">&#39;{&quot;destination&quot;: &quot;platform=iOS Simulator,name=iPhone 15&quot;}&#39;</span>
+<p><strong>Customization:</strong> Set <code>ADDITIONAL_TESTS_SETTINGS</code> in your project's Fastfile:</p>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;ADDITIONAL_TESTS_SETTINGS&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="ss">destination</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;platform=iOS Simulator,name=iPhone 15&quot;</span>
+<span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
 </code></pre></div>
 <hr />
 <h2 id="utility-helpers">Utility helpers</h2>

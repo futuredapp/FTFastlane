@@ -1191,18 +1191,17 @@
 <ol>
 <li>Installs dependencies (<code>dependencies</code> private lane):<ul>
 <li>Selects Xcode version if <code>XCODE_VERSION</code> is set</li>
-<li>Installs Homebrew packages from <code>Brewfile</code> or SwiftLint directly</li>
 <li>Runs <code>pod install</code> if a <code>Podfile</code> exists</li>
 </ul>
 </li>
 <li>Generates GraphQL operations if <code>APOLLO_CODEGEN_CONFIG_PATH</code> is set</li>
 <li>Runs all unit and UI tests via <code>run_tests</code> (scan)</li>
-<li>Runs <a href="https://danger.systems/ruby/">Danger</a> to report back to the pull request (CI only)</li>
 </ol>
 <h3 id="customizing-test-settings">Customizing test settings</h3>
-<p>Override default test settings by providing a JSON string via <code>ADDITIONAL_TESTS_SETTINGS</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">ADDITIONAL_TESTS_SETTINGS</span><span class="o">=</span><span class="s1">&#39;{&quot;destination&quot;: &quot;platform=iOS Simulator,name=iPhone 15&quot;}&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>bundle<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>fastlane<span class="w"> </span><span class="nb">test</span>
+<p>Override default test settings by setting <code>ADDITIONAL_TESTS_SETTINGS</code> in your project's Fastfile:</p>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;ADDITIONAL_TESTS_SETTINGS&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="ss">destination</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;platform=iOS Simulator,name=iPhone 15&quot;</span>
+<span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
 </code></pre></div>
 <p>See <a href="../../configuration/helpers/#tests_settings">Helpers</a> for default test configuration.</p>
 
