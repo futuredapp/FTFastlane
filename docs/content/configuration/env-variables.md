@@ -1,5 +1,3 @@
-# Environment Variables
-
 ## Organization-level variables
 
 These must be set by the organization's adapter Fastfile (the private repo that imports `ios-fastlane`).
@@ -23,7 +21,7 @@ These are set by each consumer project's Fastfile or `.env` file.
 | `APP_IDENTIFIER` | Yes | Base bundle identifier (e.g., `app.futured.myapp`) |
 | `APP_SCHEME` | Yes | Xcode scheme name |
 | `APP_NAME` | Yes | Application name for build outputs |
-| `MATCH_PASSWORD` | Yes | Password for decrypting match certificates |
+| `MATCH_PASSWORD` | Yes | Password for decrypting match certificates (set in CI secrets or `.env`, not in Fastfile) |
 
 ## Optional project variables
 
@@ -34,14 +32,13 @@ These are set by each consumer project's Fastfile or `.env` file.
 | `ASC_TEAM_ID_CUSTOMER` | Customer's App Store Connect Team ID |
 | `CUSTOMERS_BRANCH` | Git branch in certificates repo for customer certificates |
 | `APP_EXTENSIONS` | Comma-separated list of app extension names |
-| `VERSION_NUMBER` | Marketing version number (defaults to `1.0.0` for beta, tag name for release) |
+| `VERSION_NUMBER` | Marketing version number (defaults to `1.0.0` if unset; CI typically sets this from the release tag) |
 
 ## CI / build-time variables
 
 | Variable | Description |
 |----------|-------------|
 | `CHANGELOG` | TestFlight changelog for beta builds |
-| `BADGE_DARK` | Set to `"true"` for dark badge overlay on beta app icons |
 | `XCODE_VERSION` | Specific Xcode version to select |
 | `FL_BUILD_NUMBER_PROJECT` | Path to Xcode project file (if not in root or multiple exist) |
 | `APOLLO_CODEGEN_CONFIG_PATH` | Path to Apollo GraphQL codegen config |

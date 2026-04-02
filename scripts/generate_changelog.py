@@ -23,6 +23,8 @@ import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from fastfile_parser import FastfileAPI, LaneInfo, parse_fastfile
+
 SCRIPT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = SCRIPT_DIR.parent
 FASTFILE_PATH = "fastlane/Fastfile"
@@ -34,36 +36,10 @@ AUTHOR_ALIASES: dict[str, str] = {
 }
 AUTHOR_EXCLUDE: set[str] = {"github-actions[bot]"}
 
-# ---------------------------------------------------------------------------
-# Regex patterns for Fastfile parsing
-# ---------------------------------------------------------------------------
-
-RE_DESC = re.compile(r'^desc\s+"(.+)"')
-RE_LANE = re.compile(r"^lane\s+:(\w+)\s+do")
-RE_PRIVATE_LANE = re.compile(r"^private_lane\s+:(\w+)\s+do")
-RE_HELPER = re.compile(r"^def\s+(\w+)")
-RE_PLUGIN = re.compile(r'^fastlane_require\s+"(.+)"')
-RE_ENV = re.compile(r'ENV\["(\w+)"\]')
 
 # ---------------------------------------------------------------------------
 # Data structures
 # ---------------------------------------------------------------------------
-
-
-@dataclass
-class LaneInfo:
-    name: str
-    description: str = ""
-    visibility: str = "public"
-
-
-@dataclass
-class FastfileAPI:
-    lanes: dict[str, LaneInfo] = field(default_factory=dict)
-    private_lanes: dict[str, LaneInfo] = field(default_factory=dict)
-    helpers: set[str] = field(default_factory=set)
-    plugins: set[str] = field(default_factory=set)
-    env_vars: set[str] = field(default_factory=set)
 
 
 @dataclass
@@ -182,57 +158,6 @@ def get_merge_pr_summaries(old_tag: str, new_tag: str) -> list[str]:
     if not raw:
         return []
     return raw.splitlines()
-
-
-# ---------------------------------------------------------------------------
-# Fastfile parser
-# ---------------------------------------------------------------------------
-
-
-def parse_fastfile(text: str) -> FastfileAPI:
-    api = FastfileAPI()
-    if not text:
-        return api
-
-    pending_desc = ""
-    for line in text.splitlines():
-        stripped = line.strip()
-
-        m = RE_PLUGIN.match(stripped)
-        if m:
-            api.plugins.add(m.group(1))
-            continue
-
-        m = RE_DESC.match(stripped)
-        if m:
-            pending_desc = m.group(1)
-            continue
-
-        m = RE_LANE.match(stripped)
-        if m:
-            name = m.group(1)
-            api.lanes[name] = LaneInfo(name=name, description=pending_desc, visibility="public")
-            pending_desc = ""
-            continue
-
-        m = RE_PRIVATE_LANE.match(stripped)
-        if m:
-            name = m.group(1)
-            api.private_lanes[name] = LaneInfo(name=name, description=pending_desc, visibility="private")
-            pending_desc = ""
-            continue
-
-        m = RE_HELPER.match(stripped)
-        if m:
-            api.helpers.add(m.group(1))
-            pending_desc = ""
-            continue
-
-        # Collect ENV references from any line
-        for env_match in RE_ENV.finditer(line):
-            api.env_vars.add(env_match.group(1))
-
-    return api
 
 
 # ---------------------------------------------------------------------------

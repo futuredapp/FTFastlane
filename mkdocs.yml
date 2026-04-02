@@ -47,6 +47,9 @@ theme:
 plugins:
   - search
 
+exclude_docs: |
+  content/
+
 nav:
   - Home: index.md
   - Lanes:

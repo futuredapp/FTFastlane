@@ -3,3 +3,12 @@ venv/
 
 # Generated docs
 docs/changelog.md
+docs/lanes/
+docs/configuration/env-variables.md
+docs/configuration/helpers.md
+
+# MkDocs build output
+site/
+
+# OS files
+.DS_Store

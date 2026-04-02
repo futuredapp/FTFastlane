@@ -58,10 +58,16 @@ Run the create apps lane to register identifiers in the Apple Developer Portal a
 bundle exec fastlane create_apps
 ```
 
-If the app has extensions:
+If the app has extensions, set `APP_EXTENSIONS` in your project's Fastfile:
+
+```ruby
+ENV["APP_EXTENSIONS"] = "widget,notification-service"
+```
+
+Then run:
 
 ```bash
-APP_EXTENSIONS="widget,notification-service" bundle exec fastlane create_apps_for_extension
+bundle exec fastlane create_apps_for_extension
 ```
 
 ## 5. Generate provisioning profiles

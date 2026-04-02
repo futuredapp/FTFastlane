@@ -40,6 +40,7 @@ jobs:
           cache: 'pip'
           cache-dependency-path: requirements-docs.txt
       - run: pip install -r requirements-docs.txt
+      - run: PYTHONPATH=scripts python scripts/generate_docs.py
       - name: Determine version and alias
         id: version
         run: |
@@ -56,7 +57,7 @@ jobs:
               echo "alias="
             } >> "$GITHUB_OUTPUT"
           fi
-      - run: python scripts/generate_changelog.py --ref ${{ github.ref }}
+      - run: PYTHONPATH=scripts python scripts/generate_changelog.py --ref ${{ github.ref }}
       - run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
@@ -92,7 +93,7 @@ jobs:
 
           for tag in $(git tag --sort=v:refname); do
             echo "::group::Deploying $tag"
-            python scripts/generate_changelog.py --ref "refs/tags/$tag"
+            PYTHONPATH=scripts python scripts/generate_changelog.py --ref "refs/tags/$tag"
             if [[ "$tag" == "$LATEST_TAG" ]]; then
               mike deploy --push --update-aliases "$tag" latest
             else
@@ -104,7 +105,7 @@ jobs:
           mike set-default --push latest
 
           echo "::group::Deploying main"
-          python scripts/generate_changelog.py --ref refs/heads/main
+          PYTHONPATH=scripts python scripts/generate_changelog.py --ref refs/heads/main
           mike deploy --push main
           echo "::endgroup::"
 

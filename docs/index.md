@@ -55,6 +55,8 @@ import_from_git(url: "git@github.com:your-org/fastlane.git")
 | Lane | Description |
 |------|-------------|
 | [`provisioning`](lanes/provisioning.md) | Download development certificates and provisioning profiles |
+| [`update_provisioning`](lanes/provisioning.md#update_provisioning) | Register devices and update all profiles |
+| [`update_release_provisioning`](lanes/provisioning.md#update_release_provisioning) | Update release provisioning profiles only |
 | [`test`](lanes/test.md) | Run tests and report status to GitHub |
 | [`beta`](lanes/beta.md) | Build and upload beta to TestFlight |
 | [`release`](lanes/release.md) | Build and upload release to TestFlight |

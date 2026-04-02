@@ -1,13 +1,3 @@
-# Generate GraphQL Operations
-
-## generate_graphql_operations
-
-Run Apollo iOS CLI to generate GraphQL models. This lane only executes if `APOLLO_CODEGEN_CONFIG_PATH` is set.
-
-```bash
-bundle exec fastlane generate_graphql_operations
-```
-
 ### What it does
 
 1. Checks if `APOLLO_CODEGEN_CONFIG_PATH` is defined
@@ -15,12 +5,6 @@ bundle exec fastlane generate_graphql_operations
    ```bash
    Scripts/apollo-ios-cli generate --path <config_path>
    ```
-
-### Environment variables used
-
-| Variable | Purpose |
-|----------|---------|
-| `APOLLO_CODEGEN_CONFIG_PATH` | Path to Apollo GraphQL codegen config file |
 
 ### Notes
 

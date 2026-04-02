@@ -1,5 +1,3 @@
-# Helper Methods
-
 The Fastfile provides several helper methods that configure core Fastlane actions. These methods return base settings that can be merged with additional parameters.
 
 ## build_settings
@@ -16,10 +14,13 @@ Configures the `build_ios_app` action.
 }
 ```
 
-**Customization:** Set `ADDITIONAL_BUILD_SETTINGS` with a JSON string to merge additional parameters.
+**Customization:** Set `ADDITIONAL_BUILD_SETTINGS` in your project's Fastfile:
 
-```bash
-ADDITIONAL_BUILD_SETTINGS='{"derived_data_path": "./CustomDerivedData", "xcargs": "-allowProvisioningUpdates"}'
+```ruby
+ENV["ADDITIONAL_BUILD_SETTINGS"] = {
+  derived_data_path: "./CustomDerivedData",
+  xcargs: "-allowProvisioningUpdates"
+}.to_json
 ```
 
 ---
@@ -40,10 +41,10 @@ Configures `sync_code_signing` (match).
 }
 ```
 
-**Customization:** Set `ADDITIONAL_CODE_SIGNING_SETTINGS` with a JSON string.
+**Customization:** Set `ADDITIONAL_CODE_SIGNING_SETTINGS` in your project's Fastfile:
 
-```bash
-ADDITIONAL_CODE_SIGNING_SETTINGS='{"readonly": true}'
+```ruby
+ENV["ADDITIONAL_CODE_SIGNING_SETTINGS"] = { readonly: true }.to_json
 ```
 
 !!! note
@@ -66,10 +67,12 @@ Configures `run_tests` (scan).
 }
 ```
 
-**Customization:** Set `ADDITIONAL_TESTS_SETTINGS` with a JSON string.
+**Customization:** Set `ADDITIONAL_TESTS_SETTINGS` in your project's Fastfile:
 
-```bash
-ADDITIONAL_TESTS_SETTINGS='{"destination": "platform=iOS Simulator,name=iPhone 15"}'
+```ruby
+ENV["ADDITIONAL_TESTS_SETTINGS"] = {
+  destination: "platform=iOS Simulator,name=iPhone 15"
+}.to_json
 ```
 
 ---
