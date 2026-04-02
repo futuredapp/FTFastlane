@@ -12,15 +12,15 @@ jobs:
   check-docs-updated:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - name: Check if documentation was updated
+      - name: Check if custom documentation was updated
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          DOCS_CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- docs/ | wc -l | tr -d ' ')
+          DOCS_CHANGED=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- docs/content/ | wc -l | tr -d ' ')
 
           if [ "$DOCS_CHANGED" -eq 0 ]; then
             COMMENT_MARKER="<!-- docs-drift-check -->"
@@ -30,12 +30,11 @@ jobs:
               gh pr comment ${{ github.event.pull_request.number }} --body "${COMMENT_MARKER}
           **Documentation Drift Check**
 
-          The Fastfile was modified in this PR but no documentation files were updated.
-          Please review if any changes in \`docs/\` are needed to keep the documentation in sync.
+          The Fastfile was modified in this PR but no custom documentation files were updated.
 
-          Relevant docs to check:
-          - \`docs/lanes/\` — Lane descriptions, options, and workflows
-          - \`docs/configuration/env-variables.md\` — Environment variable tables
-          - \`docs/configuration/helpers.md\` — Helper method documentation"
+          Lane pages, options tables, and ENV var references are auto-generated from the Fastfile.
+          However, please review if any **custom content** in \`docs/content/\` needs updating:
+          - \`docs/content/lanes/\` — \"What it does\" steps, notes, and guides per lane
+          - \`docs/content/configuration/\` — ENV variable descriptions and helper examples"
             fi
           fi

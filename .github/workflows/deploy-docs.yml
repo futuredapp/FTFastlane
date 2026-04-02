@@ -6,7 +6,10 @@ on:
     tags: ['*']
     paths:
       - 'fastlane/**'
-      - 'docs/**'
+      - 'docs/content/**'
+      - 'docs/index.md'
+      - 'docs/guides/**'
+      - 'docs/configuration/index.md'
       - 'mkdocs.yml'
       - 'requirements-docs.txt'
       - 'scripts/**'
@@ -93,6 +96,7 @@ jobs:
 
           for tag in $(git tag --sort=v:refname); do
             echo "::group::Deploying $tag"
+            PYTHONPATH=scripts python scripts/generate_docs.py
             PYTHONPATH=scripts python scripts/generate_changelog.py --ref "refs/tags/$tag"
             if [[ "$tag" == "$LATEST_TAG" ]]; then
               mike deploy --push --update-aliases "$tag" latest
@@ -105,6 +109,7 @@ jobs:
           mike set-default --push latest
 
           echo "::group::Deploying main"
+          PYTHONPATH=scripts python scripts/generate_docs.py
           PYTHONPATH=scripts python scripts/generate_changelog.py --ref refs/heads/main
           mike deploy --push main
           echo "::endgroup::"
