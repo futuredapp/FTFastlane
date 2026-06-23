@@ -3,6 +3,9 @@ default_platform :ios
 
 fastlane_require "fastlane-plugin-versioning"
 
+require_relative "lib/version_resolver"
+require_relative "lib/settings_merger"
+
 def keychain_name
   "MatchKeychain"
 end
@@ -24,13 +27,7 @@ def all_bundle_ids(identifier)
 end
 
 def merge_additional_settings(base, env_key)
-  additional = ENV[env_key]
-  unless additional.nil? || additional.empty?
-    json_data = JSON.parse(additional)
-    json_data = json_data.transform_keys(&:to_sym) if json_data.is_a?(Hash)
-    base.merge!(json_data)
-  end
-  base
+  SettingsMerger.merge(base, ENV[env_key])
 end
 
 def build_settings
@@ -235,10 +232,7 @@ private_lane :bump do |options|
     skip_info_plist: true
   )
 
-  version_override = options[:version_number].to_s.strip
-  version_override = ENV["VERSION_NUMBER"].to_s.strip if version_override.empty?
-  version_override = "1.0.0" if version_override.empty?
-  version = version_override.split("-").first
+  version = VersionResolver.resolve(options[:version_number], ENV["VERSION_NUMBER"])
 
   increment_version_number_in_xcodeproj(
     version_number: version,
