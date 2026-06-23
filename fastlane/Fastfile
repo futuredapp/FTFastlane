@@ -235,11 +235,10 @@ private_lane :bump do |options|
     skip_info_plist: true
   )
 
-  version = if options[:version_number]
-              options[:version_number].to_s
-            else
-              (ENV["VERSION_NUMBER"] || "1.0.0").split("-").first
-            end
+  version_override = options[:version_number].to_s.strip
+  version_override = ENV["VERSION_NUMBER"].to_s.strip if version_override.empty?
+  version_override = "1.0.0" if version_override.empty?
+  version = version_override.split("-").first
 
   increment_version_number_in_xcodeproj(
     version_number: version,
