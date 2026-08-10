@@ -4,7 +4,7 @@
 2. Installs dependencies (Xcode version, CocoaPods if needed)
 3. Generates GraphQL operations if configured
 4. Increments build number based on latest TestFlight build (or uses custom `build_number`)
-5. Sets version from `VERSION_NUMBER` env var (default `1.0.0`), or uses custom `version_number`
+5. Sets version from `VERSION_NUMBER` env var, or uses custom `version_number` — with neither, the project's `MARKETING_VERSION` is left untouched
 6. Creates a temporary CI keychain
 7. Syncs appstore provisioning profiles for the beta bundle identifier (`.beta` suffix)
 8. Builds the app using the **Beta** configuration

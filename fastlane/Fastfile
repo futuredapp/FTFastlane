@@ -236,14 +236,16 @@ private_lane :bump do |options|
 
   version_override = options[:version_number].to_s.strip
   version_override = ENV["VERSION_NUMBER"].to_s.strip if version_override.empty?
-  version_override = "1.0.0" if version_override.empty?
-  version = version_override.split("-").first
 
-  increment_version_number_in_xcodeproj(
-    version_number: version,
-    scheme: ENV["APP_SCHEME"],
-    **(ENV["FL_BUILD_NUMBER_PROJECT"] ? {xcodeproj: ENV["FL_BUILD_NUMBER_PROJECT"]} : {})
-  )
+  if version_override.empty?
+    UI.message("No version number given, keeping MARKETING_VERSION from the Xcode project.")
+  else
+    increment_version_number_in_xcodeproj(
+      version_number: version_override.split("-").first,
+      scheme: ENV["APP_SCHEME"],
+      **(ENV["FL_BUILD_NUMBER_PROJECT"] ? {xcodeproj: ENV["FL_BUILD_NUMBER_PROJECT"]} : {})
+    )
+  end
 end
 
 private_lane :create_apps_online do |options|

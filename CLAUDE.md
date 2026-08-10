@@ -52,7 +52,7 @@ Set by each consumer project:
 - `APP_SCHEME` — Xcode scheme name
 - `APP_NAME` — Application name
 - `MATCH_PASSWORD` — Password for match certificates
-- `VERSION_NUMBER` — Version number (defaults to "1.0.0" for beta)
+- `VERSION_NUMBER` — Version number (when unset, the project's `MARKETING_VERSION` is kept)
 
 ## Lanes
 

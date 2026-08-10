@@ -32,7 +32,7 @@ These are set by each consumer project's Fastfile or `.env` file.
 | `ASC_TEAM_ID_CUSTOMER` | Customer's App Store Connect Team ID |
 | `CUSTOMERS_BRANCH` | Git branch in certificates repo for customer certificates |
 | `APP_EXTENSIONS` | Comma-separated list of app extension names |
-| `VERSION_NUMBER` | Marketing version number (defaults to `1.0.0` if unset; CI typically sets this from the release tag) |
+| `VERSION_NUMBER` | Marketing version number (when unset, the project's own `MARKETING_VERSION` is kept; CI typically sets this from the release tag) |
 
 ## CI / build-time variables
 
