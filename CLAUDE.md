@@ -28,7 +28,7 @@ Helper methods establish base settings merged with additional ENV variables for 
 - `build_settings` — Configures `build_ios_app`. Override with `ENV["ADDITIONAL_BUILD_SETTINGS"]` (JSON)
 - `code_signing_settings` — Configures `sync_code_signing` (match). Override with `ENV["ADDITIONAL_CODE_SIGNING_SETTINGS"]` (JSON)
 - `tests_settings` — Configures `run_tests` (scan). Override with `ENV["ADDITIONAL_TESTS_SETTINGS"]` (JSON)
-- `merge_additional_settings(base, env_key)` — DRY helper for JSON merge pattern used by the above
+- `merge_additional_settings(base, env_key)` — DRY helper for JSON merge pattern used by the above; additional `xcargs` are appended to the defaults, other keys replace them
 
 ## Organization-Level ENV Variables
 

@@ -2,6 +2,9 @@ default_platform :ios
 
 fastlane_require "fastlane-plugin-versioning"
 
+# A cold CI VM needs 15–80 s for xcodebuild -showBuildSettings, past fastlane's 3 s default and its last 24 s retry
+ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] ||= "120"
+
 def keychain_name
   "MatchKeychain"
 end
@@ -27,6 +30,8 @@ def merge_additional_settings(base, env_key)
   unless additional.nil? || additional.empty?
     json_data = JSON.parse(additional)
     json_data = json_data.transform_keys(&:to_sym) if json_data.is_a?(Hash)
+    # Project xcargs extend the default ones instead of replacing them
+    json_data[:xcargs] = "#{base[:xcargs]} #{json_data[:xcargs]}" if base[:xcargs] && json_data[:xcargs]
     base.merge!(json_data)
   end
   base
@@ -37,7 +42,9 @@ def build_settings
     {
       scheme: ENV["APP_SCHEME"],
       output_name: ENV["APP_NAME"],
-      output_directory: "./build_output/"
+      output_directory: "./build_output/",
+      # CI can't approve SPM build plugins interactively; a no-op for projects without plugins
+      xcargs: "-skipPackagePluginValidation",
     },
     "ADDITIONAL_BUILD_SETTINGS"
   )
@@ -63,6 +70,8 @@ def tests_settings
       scheme: ENV["APP_SCHEME"],
       code_coverage: true,
       result_bundle: true,
+      # Xcode 27 can wait 600 s collecting simulator diagnostics after a failed test; the failure stays in the xcresult
+      xcargs: "-skipPackagePluginValidation -collect-test-diagnostics never",
     },
     "ADDITIONAL_TESTS_SETTINGS"
   )

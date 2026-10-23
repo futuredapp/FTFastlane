@@ -42,6 +42,7 @@ These are set by each consumer project's Fastfile or `.env` file.
 | `XCODE_VERSION` | Specific Xcode version to select |
 | `FL_BUILD_NUMBER_PROJECT` | Path to Xcode project file (if not in root or multiple exist) |
 | `APOLLO_CODEGEN_CONFIG_PATH` | Path to Apollo GraphQL codegen config |
+| `FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT` | Base timeout for `xcodebuild -showBuildSettings`; defaults to `120` s because a cold CI VM can take over a minute (fastlane's own default is 3 s) |
 
 ## Customization variables
 
