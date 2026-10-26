@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1412,19 +1412,21 @@
 
 <h1 id="helper-methods">Helper Methods</h1>
 <p>The Fastfile provides several helper methods that configure core Fastlane actions. These methods return base settings that can be merged with additional parameters.</p>
+<p>Additional parameters replace the defaults, except <code>xcargs</code>: a project's <code>xcargs</code> are appended to the default ones. <code>-skipPackagePluginValidation</code> lets CI build packages with SPM build plugins, which can't be approved interactively; it has no effect on projects without plugins.</p>
 <h2 id="build_settings">build_settings</h2>
 <p>Configures the <code>build_ios_app</code> action.</p>
 <p><strong>Default configuration:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="ss">scheme</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_SCHEME&quot;</span><span class="o">]</span><span class="p">,</span>
-<span class="w">  </span><span class="ss">output_name</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_NAME&quot;</span><span class="o">]</span><span class="p">,</span>
-<span class="w">  </span><span class="ss">output_directory</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./build_output/&quot;</span>
+<span class="w">  </span><span class="ss">scheme</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_SCHEME"</span><span class="o">]</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">output_name</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_NAME"</span><span class="o">]</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">output_directory</span><span class="p">:</span><span class="w"> </span><span class="s2">"./build_output/"</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">xcargs</span><span class="p">:</span><span class="w"> </span><span class="s2">"-skipPackagePluginValidation"</span>
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>Customization:</strong> Set <code>ADDITIONAL_BUILD_SETTINGS</code> in your project's Fastfile:</p>
-<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;ADDITIONAL_BUILD_SETTINGS&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="ss">derived_data_path</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;./CustomDerivedData&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="ss">xcargs</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-allowProvisioningUpdates&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">"ADDITIONAL_BUILD_SETTINGS"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="ss">derived_data_path</span><span class="p">:</span><span class="w"> </span><span class="s2">"./CustomDerivedData"</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">xcargs</span><span class="p">:</span><span class="w"> </span><span class="s2">"-allowProvisioningUpdates"</span>
 <span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
 </code></pre></div>
 <hr />
@@ -1432,15 +1434,15 @@
 <p>Configures <code>sync_code_signing</code> (match).</p>
 <p><strong>Default configuration:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;USER_EMAIL&quot;</span><span class="o">]</span><span class="p">,</span>
-<span class="w">  </span><span class="ss">git_url</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;MATCH_GIT_URL&quot;</span><span class="o">]</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">"USER_EMAIL"</span><span class="o">]</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">git_url</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">"MATCH_GIT_URL"</span><span class="o">]</span><span class="p">,</span>
 <span class="w">  </span><span class="ss">shallow_clone</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span><span class="p">,</span>
 <span class="w">  </span><span class="ss">clone_branch_directly</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span><span class="p">,</span>
-<span class="w">  </span><span class="ss">keychain_password</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;MATCH_PASSWORD&quot;</span><span class="o">]</span>
+<span class="w">  </span><span class="ss">keychain_password</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">"MATCH_PASSWORD"</span><span class="o">]</span>
 <span class="p">}</span>
 </code></pre></div>
 <p><strong>Customization:</strong> Set <code>ADDITIONAL_CODE_SIGNING_SETTINGS</code> in your project's Fastfile:</p>
-<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;ADDITIONAL_CODE_SIGNING_SETTINGS&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="ss">readonly</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span><span class="w"> </span><span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">"ADDITIONAL_CODE_SIGNING_SETTINGS"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="ss">readonly</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span><span class="w"> </span><span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
 </code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1452,14 +1454,16 @@
 <p><strong>Default configuration:</strong></p>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="ss">skip_build</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span><span class="p">,</span>
-<span class="w">  </span><span class="ss">scheme</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_SCHEME&quot;</span><span class="o">]</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">scheme</span><span class="p">:</span><span class="w"> </span><span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_SCHEME"</span><span class="o">]</span><span class="p">,</span>
 <span class="w">  </span><span class="ss">code_coverage</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span><span class="p">,</span>
-<span class="w">  </span><span class="ss">result_bundle</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span>
+<span class="w">  </span><span class="ss">result_bundle</span><span class="p">:</span><span class="w"> </span><span class="kp">true</span><span class="p">,</span>
+<span class="w">  </span><span class="ss">xcargs</span><span class="p">:</span><span class="w"> </span><span class="s2">"-skipPackagePluginValidation -collect-test-diagnostics never"</span>
 <span class="p">}</span>
 </code></pre></div>
+<p><code>-collect-test-diagnostics never</code> skips the simulator sysdiagnose after a failed test, which Xcode 27 can wait 600 s for; the failure and its logs stay in the result bundle.</p>
 <p><strong>Customization:</strong> Set <code>ADDITIONAL_TESTS_SETTINGS</code> in your project's Fastfile:</p>
-<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;ADDITIONAL_TESTS_SETTINGS&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="ss">destination</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;platform=iOS Simulator,name=iPhone 15&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">"ADDITIONAL_TESTS_SETTINGS"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="ss">destination</span><span class="p">:</span><span class="w"> </span><span class="s2">"platform=iOS Simulator,name=iPhone 15"</span>
 <span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
 </code></pre></div>
 <hr />
@@ -1650,10 +1654,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>

@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1311,15 +1311,15 @@
 </ul>
 <h2 id="configuration">Configuration</h2>
 <p>Set these additional environment variables in the consumer project's Fastfile:</p>
-<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_IDENTIFIER&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;app.example.myapp&quot;</span><span class="w">           </span><span class="c1"># Your internal identifier</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_IDENTIFIER_CUSTOMER&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;com.client.theapp&quot;</span><span class="w">   </span><span class="c1"># Client&#39;s bundle identifier</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_SCHEME&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;MyApp&quot;</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_NAME&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;My App&quot;</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TEAM_ID_CUSTOMER&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ABCDEF1234&quot;</span><span class="w">                 </span><span class="c1"># Client&#39;s Apple Developer Team ID</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;ASC_TEAM_ID_CUSTOMER&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;9876543&quot;</span><span class="w">                </span><span class="c1"># Client&#39;s App Store Connect Team ID</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;CUSTOMERS_BRANCH&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;client-name&quot;</span><span class="w">                </span><span class="c1"># Branch in certificates repo</span>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_IDENTIFIER"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"app.example.myapp"</span><span class="w">           </span><span class="c1"># Your internal identifier</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_IDENTIFIER_CUSTOMER"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"com.client.theapp"</span><span class="w">   </span><span class="c1"># Client's bundle identifier</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_SCHEME"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"MyApp"</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_NAME"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"My App"</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"TEAM_ID_CUSTOMER"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ABCDEF1234"</span><span class="w">                 </span><span class="c1"># Client's Apple Developer Team ID</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"ASC_TEAM_ID_CUSTOMER"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"9876543"</span><span class="w">                </span><span class="c1"># Client's App Store Connect Team ID</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"CUSTOMERS_BRANCH"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"client-name"</span><span class="w">                </span><span class="c1"># Branch in certificates repo</span>
 
-<span class="n">import_from_git</span><span class="p">(</span><span class="ss">url</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;git@github.com:your-org/fastlane.git&quot;</span><span class="p">)</span>
+<span class="n">import_from_git</span><span class="p">(</span><span class="ss">url</span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:your-org/fastlane.git"</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="how-it-works">How it works</h2>
 <h3 id="certificate-management">Certificate management</h3>
@@ -1497,10 +1497,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>

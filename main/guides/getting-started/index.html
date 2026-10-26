@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -1243,24 +1243,24 @@
 <h2 id="1-create-an-organization-adapter-one-time">1. Create an organization adapter (one-time)</h2>
 <p>If your organization doesn't already have an adapter repository, create one. This private repository sets organization-specific values and imports the public <code>ios-fastlane</code> Fastfile.</p>
 <p>Create <code>fastlane/Fastfile</code> in your adapter repo:</p>
-<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;USER_EMAIL&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ops@example.com&quot;</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;TEAM_ID&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;YOUR_TEAM_ID&quot;</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;ASC_TEAM_ID&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;YOUR_ASC_TEAM_ID&quot;</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;MATCH_GIT_URL&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git@github.com:your-org/apple-certificates.git&quot;</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;MATCH_GIT_BRANCH&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;master&quot;</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;DEVICE_LIST_GIT_URL&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;git@github.com:your-org/fastlane.git&quot;</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;DEVICE_LIST_GIT_BRANCH&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;main&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">"USER_EMAIL"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"ops@example.com"</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"TEAM_ID"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"YOUR_TEAM_ID"</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"ASC_TEAM_ID"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"YOUR_ASC_TEAM_ID"</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"MATCH_GIT_URL"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"git@github.com:your-org/apple-certificates.git"</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"MATCH_GIT_BRANCH"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"master"</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"DEVICE_LIST_GIT_URL"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"git@github.com:your-org/fastlane.git"</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"DEVICE_LIST_GIT_BRANCH"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"main"</span>
 
-<span class="n">import_from_git</span><span class="p">(</span><span class="ss">url</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://github.com/futuredapp/ios-fastlane.git&quot;</span><span class="p">)</span>
+<span class="n">import_from_git</span><span class="p">(</span><span class="ss">url</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://github.com/futuredapp/ios-fastlane.git"</span><span class="p">)</span>
 </code></pre></div>
 <p>An example adapter is available in <code>fastlane/adapter/Fastfile.example</code>.</p>
 <h2 id="2-set-up-the-consumer-project">2. Set up the consumer project</h2>
 <p>In your iOS project, create <code>fastlane/Fastfile</code>:</p>
-<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_IDENTIFIER&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;app.example.myapp&quot;</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_SCHEME&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;MyApp&quot;</span>
-<span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_NAME&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;My App&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_IDENTIFIER"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"app.example.myapp"</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_SCHEME"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"MyApp"</span>
+<span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_NAME"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"My App"</span>
 
-<span class="n">import_from_git</span><span class="p">(</span><span class="ss">url</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;git@github.com:your-org/fastlane.git&quot;</span><span class="p">)</span>
+<span class="n">import_from_git</span><span class="p">(</span><span class="ss">url</span><span class="p">:</span><span class="w"> </span><span class="s2">"git@github.com:your-org/fastlane.git"</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="3-set-secrets">3. Set secrets</h2>
 <p>Configure these in your CI environment or local <code>.env</code> file:</p>
@@ -1272,7 +1272,7 @@
 <div class="highlight"><pre><span></span><code>bundle<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>fastlane<span class="w"> </span>create_apps
 </code></pre></div>
 <p>If the app has extensions, set <code>APP_EXTENSIONS</code> in your project's Fastfile:</p>
-<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">&quot;APP_EXTENSIONS&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;widget,notification-service&quot;</span>
+<div class="highlight"><pre><span></span><code><span class="no">ENV</span><span class="o">[</span><span class="s2">"APP_EXTENSIONS"</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"widget,notification-service"</span>
 </code></pre></div>
 <p>Then run:</p>
 <div class="highlight"><pre><span></span><code>bundle<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>fastlane<span class="w"> </span>create_apps_for_extension
@@ -1393,10 +1393,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tabs", "navigation.sections", "navigation.indexes", "navigation.expand", "content.code.copy"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
       
     
   </body>
