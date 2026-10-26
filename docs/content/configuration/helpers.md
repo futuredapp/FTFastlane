@@ -1,5 +1,7 @@
 The Fastfile provides several helper methods that configure core Fastlane actions. These methods return base settings that can be merged with additional parameters.
 
+Additional parameters replace the defaults, except `xcargs`: a project's `xcargs` are appended to the default ones. `-skipPackagePluginValidation` lets CI build packages with SPM build plugins, which can't be approved interactively; it has no effect on projects without plugins.
+
 ## build_settings
 
 Configures the `build_ios_app` action.
@@ -10,7 +12,8 @@ Configures the `build_ios_app` action.
 {
   scheme: ENV["APP_SCHEME"],
   output_name: ENV["APP_NAME"],
-  output_directory: "./build_output/"
+  output_directory: "./build_output/",
+  xcargs: "-skipPackagePluginValidation"
 }
 ```
 
@@ -63,9 +66,12 @@ Configures `run_tests` (scan).
   skip_build: true,
   scheme: ENV["APP_SCHEME"],
   code_coverage: true,
-  result_bundle: true
+  result_bundle: true,
+  xcargs: "-skipPackagePluginValidation -collect-test-diagnostics never"
 }
 ```
+
+`-collect-test-diagnostics never` skips the simulator sysdiagnose after a failed test, which Xcode 27 can wait 600 s for; the failure and its logs stay in the result bundle.
 
 **Customization:** Set `ADDITIONAL_TESTS_SETTINGS` in your project's Fastfile:
 
