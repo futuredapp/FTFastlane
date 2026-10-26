@@ -1273,7 +1273,7 @@
 <li>Installs dependencies (Xcode version, CocoaPods if needed)</li>
 <li>Generates GraphQL operations if configured</li>
 <li>Increments build number based on latest TestFlight build (or uses custom <code>build_number</code>)</li>
-<li>Sets version from <code>VERSION_NUMBER</code> env var, or uses custom <code>version_number</code></li>
+<li>Sets version from <code>VERSION_NUMBER</code> env var, or uses custom <code>version_number</code> — with neither, the project's <code>MARKETING_VERSION</code> is left untouched</li>
 <li>Creates a temporary CI keychain</li>
 <li>Syncs appstore provisioning profiles:<ul>
 <li><strong>Own account:</strong> Uses <code>MATCH_GIT_BRANCH</code> and <code>APP_IDENTIFIER</code></li>
